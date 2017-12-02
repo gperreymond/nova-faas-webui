@@ -1,5 +1,6 @@
 const Hapi = require('hapi')
-const NovaFaas = require('./NovaFaasPlugin')
+const NovaFaas = require('./plugins/NovaFaasPlugin')
+const Services = require('./plugins/ServicesPlugin')
 
 const server = new Hapi.Server()
 server.connection({
@@ -8,16 +9,26 @@ server.connection({
     cors: {origin: ['*']}
   }
 })
-server.register([NovaFaas], (error) => {
+
+let plugins = [Services]
+if (!module.parent) {
+  plugins.push(NovaFaas)
+}
+
+server.register(plugins, (error) => {
   if (error) {
     console.log(error)
     return process.exit(1)
   }
-  server.start((error) => {
-    if (error) {
-      console.log(error)
-      return process.exit(1)
-    }
-    console.log('server started')
-  })
+  if (!module.parent) {
+    server.start((error) => {
+      if (error) {
+        console.log(error)
+        return process.exit(1)
+      }
+      console.log('server started')
+    })
+  }
 })
+
+module.exports = server

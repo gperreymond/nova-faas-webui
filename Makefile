@@ -1,4 +1,4 @@
-.PHONY: up down
+.PHONY: up down test coverage-publish
 
 up:
 	docker-compose up -d;
@@ -8,7 +8,6 @@ down:
 
 test:
 	rm -rf coverage;
-	npm run test:standard;
 	npm run test:coverage;
 
 coverage-publish:

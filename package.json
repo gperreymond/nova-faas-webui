@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "start:platform": "./node_modules/.bin/webpack --watch",
-    "start:server": "docker-compose exec platform-web node_modules/.bin/nodemon --config nodemon.json server",
-    "test:standard": "node_modules/.bin/standard --verbose | snazzy",
+    "start:server": "docker-compose exec platform-api ./node_modules/.bin/nodemon --config nodemon.json server",
+    "test:standard": "./node_modules/.bin/standard --verbose | snazzy",
     "test:coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text ./node_modules/.bin/mocha --opts .mocharc",
     "coverage:publish": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/gperreymond/nova-faas-webui.git"
   },
-  "author": "",
+  "author": "Gilles Perreymond <gperreymond@gmail.com> (https://github.com/gperreymond)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gperreymond/nova-faas-webui/issues"
@@ -23,10 +23,18 @@
     "node": "8"
   },
   "dependencies": {
+    "bell": "8.9.0",
+    "boom": "7.1.1",
+    "catbox": "9.0.0",
+    "catbox-memcached": "1.1.1",
+    "catbox-memory": "3.1.1",
     "debug": "3.1.0",
     "hapi": "16.6.2",
+    "hapi-auth-jwt2": "7.3.0",
     "joi": "13.0.2",
-    "nova-faas": "1.0.2",
+    "jsonwebtoken": "8.1.0",
+    "nconf": "0.9.1",
+    "nova-faas": "1.0.5",
     "uuid": "3.1.0",
     "yamljs": "0.3.0"
   },
@@ -35,6 +43,7 @@
     "babel-helper-vue-jsx-merge-props": "2.0.2",
     "babel-loader": "7.1.2",
     "babel-plugin-syntax-jsx": "6.18.0",
+    "babel-plugin-transform-runtime": "6.23.0",
     "babel-plugin-transform-vue-jsx": "3.5.0",
     "babel-preset-env": "1.6.1",
     "babel-register": "6.26.0",
@@ -43,6 +52,7 @@
     "coveralls": "3.0.0",
     "css-loader": "0.28.7",
     "extract-text-webpack-plugin": "3.0.2",
+    "install": "0.10.2",
     "is_js": "0.9.0",
     "jsdom": "11.5.1",
     "jsdom-global": "3.0.2",
@@ -51,6 +61,7 @@
     "mocha-webpack": "1.0.1",
     "nodemon": "1.12.1",
     "normalize.css": "7.0.0",
+    "npm": "5.5.1",
     "nyc": "11.3.0",
     "rewire": "3.0.2",
     "sinon": "4.1.2",
@@ -68,7 +79,6 @@
   },
   "standard": {
     "globals": [
-      "xit",
       "beforeEach",
       "describe",
       "it"

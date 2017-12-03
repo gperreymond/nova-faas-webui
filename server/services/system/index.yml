@@ -7,3 +7,11 @@ rules:
     path: "/hc"
     config: "health-check/config"
     handler: "health-check"
+  -
+    type: route
+    method:
+      - GET
+      - POST
+    path: "/auth/google"
+    handler: "auth/google"
+    config: "auth/google/config"

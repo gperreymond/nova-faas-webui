@@ -1,5 +1,5 @@
 <template>
-  <h2>LOGIN</h2>
+  <button v-on:click="authGoogle">Signin with google</button>
 </template>
 
 <script src="./script.js" />

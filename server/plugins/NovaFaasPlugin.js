@@ -8,7 +8,7 @@ const NovaFaasPlugin = {
     }
     server.nova.server
       .use(path.resolve(__dirname, '../domains/**/*.js'))
-      .start()
+      .start({host: 'rabbitmq'})
     server.nova.server.on('error', error => {
       next(error)
     })

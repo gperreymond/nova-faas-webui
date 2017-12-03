@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const server = require('../../../server')
 
 describe('[unit] the server', () => {
-  it('should fail to start, because no bus connected', (done) => {
+  it('should response health check', (done) => {
     const requestDefaults = {
       method: 'GET',
       url: '/hc',

@@ -1,0 +1,10 @@
+body, html, #root {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f6f9ff;
+  color: #242628;
+}

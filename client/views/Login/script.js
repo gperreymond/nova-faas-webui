@@ -1,4 +1,5 @@
 import Debug from 'debug'
+import authGoogle from './methods/authGoogle'
 
 export default {
   name: 'ui-login',
@@ -19,6 +20,7 @@ export default {
     this.debug('destroyed')
   },
   methods: {
-    debug: Debug('nova-fass:ui-login')
+    debug: Debug('nova-fass:ui-login'),
+    authGoogle
   }
 }

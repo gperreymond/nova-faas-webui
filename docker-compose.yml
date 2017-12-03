@@ -14,6 +14,7 @@ services:
     image: node:8-alpine
     depends_on:
       - rabbitmq
+      - memcached
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
       VIRTUAL_HOST: api.nova.local.net
@@ -30,7 +31,6 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
       VIRTUAL_HOST: platform.nova.local.net
       VIRTUAL_PORT: 8043
     volumes:

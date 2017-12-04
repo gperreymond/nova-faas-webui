@@ -15,3 +15,10 @@ rules:
     path: "/auth/google"
     handler: "auth/google"
     config: "auth/google/config"
+  -
+    type: route
+    method:
+      - GET
+    path: "/auth/control"
+    handler: "auth/control"
+    config: "auth/control/config"

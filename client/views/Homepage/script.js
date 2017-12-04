@@ -4,6 +4,7 @@ export default {
   name: 'ui-homepage',
   data: function () {
     return {
+      credentials: false
     }
   },
   beforeMount: function () {
@@ -11,6 +12,7 @@ export default {
   },
   mounted: function () {
     this.debug('mounted')
+    this.credentials = this.$route.meta.credentials
   },
   updated: function () {
     this.debug('updated')

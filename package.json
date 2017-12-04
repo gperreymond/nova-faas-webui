@@ -6,7 +6,7 @@
     "start:platform": "./node_modules/.bin/webpack --watch",
     "start:server": "docker-compose exec platform-api ./node_modules/.bin/nodemon --config nodemon.json server",
     "test:standard": "./node_modules/.bin/standard --verbose | snazzy",
-    "test:coverage": "./node_modules/.bin/nyc --reporter=lcov --reporter=text ./node_modules/.bin/mocha --opts .mocharc",
+    "test:coverage": "NODE_ENV=test ./node_modules/.bin/nyc --reporter=lcov --reporter=text ./node_modules/.bin/mocha --opts .mocharc",
     "coverage:publish": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {

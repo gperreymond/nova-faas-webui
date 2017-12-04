@@ -28,7 +28,7 @@ module.exports = {
     }
   },
   memcached: {
-    host: nconf.get('NOVA_MEMCACHED_HOST') || 'memcached',
+    host: nconf.get('NOVA_MEMCACHED_HOST') || 'localhost',
     port: nconf.get('NOVA_MEMCACHED_PORT') || 11211
   }
 }

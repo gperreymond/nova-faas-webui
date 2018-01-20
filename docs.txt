@@ -1,0 +1,2 @@
+nova-faas au lancement emet un event systeme pour signaler sa présence.
+nova-faas_webui interroge ce service régulièrement pour health check.

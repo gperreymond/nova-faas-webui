@@ -3,6 +3,8 @@ const nconf = require('nconf')
 nconf.argv().env().file({ file: 'nconf.json' })
 
 module.exports = {
+  host: nconf.get('NOVA_HOST') || '0.0.0.0',
+  port: nconf.get('NOVA_PORT') || 4000,
   accounts: {
     admin: {
       email: nconf.get('NOVA_ADMIN_EMAIL') || 'gperreymond@gmail.com'
@@ -30,5 +32,11 @@ module.exports = {
   memcached: {
     host: nconf.get('NOVA_MEMCACHED_HOST') || 'localhost',
     port: nconf.get('NOVA_MEMCACHED_PORT') || 11211
+  },
+  rabbitmq: {
+    host: nconf.get('NOVA_RABBITMQ_HOST') || 'localhost',
+    port: nconf.get('NOVA_RABBITMQ_PORT') || 5672,
+    user: nconf.get('NOVA_RABBITMQ_USER') || 'guest',
+    pass: nconf.get('NOVA_RABBITMQ_PASS') || 'guest'
   }
 }

@@ -1,10 +1,13 @@
 import Debug from 'debug'
+import getConnections from './methods/connections'
 
 export default {
   name: 'ui-homepage',
   data: function () {
     return {
-      credentials: false
+      stats: {
+        connections: []
+      }
     }
   },
   beforeMount: function () {
@@ -12,7 +15,7 @@ export default {
   },
   mounted: function () {
     this.debug('mounted')
-    this.credentials = this.$route.meta.credentials
+    this.getConnections()
   },
   updated: function () {
     this.debug('updated')
@@ -21,6 +24,7 @@ export default {
     this.debug('destroyed')
   },
   methods: {
-    debug: Debug('nova-fass:ui-homepage')
+    debug: Debug('nova-fass:ui-homepage'),
+    getConnections
   }
 }

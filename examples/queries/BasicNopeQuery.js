@@ -1,8 +1,10 @@
 const Promise = require('bluebird')
 
-const handler = function () {
+const handler = function (params) {
   return new Promise((resolve, reject) => {
-    resolve({hc: 'ALIVE'})
+    setTimeout(function () {
+      resolve({data: true})
+    }, 1000)
   })
 }
 

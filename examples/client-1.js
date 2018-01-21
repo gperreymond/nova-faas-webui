@@ -14,11 +14,13 @@ client
 client.on('error', error => {
   console.log('client error')
   console.log(error)
+  client.close()
 })
 
 client.on('ready', () => {
   console.log('client connected')
   client.request('BasicNopeQuery', {message: 'This is a query'}, (data) => {
     console.log('result', data)
+    client.close()
   })
 })

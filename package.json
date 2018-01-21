@@ -35,7 +35,7 @@
     "joi": "13.1.1",
     "jsonwebtoken": "8.1.0",
     "nconf": "0.10.0",
-    "nova-faas": "1.0.6",
+    "nova-faas": "1.0.7",
     "uuid": "3.2.1",
     "yamljs": "0.3.0"
   },
@@ -63,7 +63,7 @@
     "nodemon": "1.14.11",
     "normalize.css": "7.0.0",
     "nyc": "11.4.1",
-    "sinon": "4.1.6",
+    "sinon": "4.2.0",
     "snazzy": "7.0.0",
     "standard": "10.0.3",
     "style-loader": "0.19.1",

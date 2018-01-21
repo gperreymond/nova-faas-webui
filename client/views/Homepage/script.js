@@ -1,12 +1,14 @@
 import Debug from 'debug'
-import getConnections from './methods/connections'
+import getStats from './methods/getStats'
 
 export default {
   name: 'ui-homepage',
   data: function () {
     return {
       stats: {
-        connections: []
+        servers: [],
+        clients: [],
+        services: []
       }
     }
   },
@@ -15,16 +17,15 @@ export default {
   },
   mounted: function () {
     this.debug('mounted')
-    this.getConnections()
+    this.getStats()
   },
   updated: function () {
-    this.debug('updated')
   },
   destroyed: function () {
     this.debug('destroyed')
   },
   methods: {
     debug: Debug('nova-fass:ui-homepage'),
-    getConnections
+    getStats
   }
 }

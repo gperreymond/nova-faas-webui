@@ -3,7 +3,7 @@ const config = require('../../../../config')
 
 const handler = async (request) => {
   try {
-    const response = await axios(`http://${config.rabbitmq.host}:15672/api/connections`, {
+    const response = await axios(`http://${config.rabbitmq.host}:15672/api/queues`, {
       auth: {
         username: config.rabbitmq.user,
         password: config.rabbitmq.pass
@@ -11,7 +11,16 @@ const handler = async (request) => {
     }).catch(err => {
       throw err
     })
-    return response.data
+    let servers = []
+    response.data.map(queue => {
+      if (queue.name.match(/__System.Server/)) {
+        servers.push({
+          uuid: queue.name.split('.')[2],
+          queue: queue.name
+        })
+      }
+    })
+    return servers
   } catch (err) {
     console.log(err)
     return Promise.reject(err)
@@ -20,6 +29,6 @@ const handler = async (request) => {
 
 module.exports.route = {
   method: 'GET',
-  path: '/api/rabbitmq/connections',
+  path: '/api/servers',
   handler
 }

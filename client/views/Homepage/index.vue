@@ -2,11 +2,19 @@
   <header>
     <h1>Nova Platform</h1>
     <h2>Homepage</h2>
-    <p>This is the list of all services detected and ready to use.</p>
+    <p>Overview of infrastructures.</p>
+    <h2>Servers: {{stats.servers.length}}</h2>
     <ul>
-      <li><b>{{stats.connections.length}}</b> server(s) are online</li>
+      <li v-for="item in stats.servers">{{item.uuid}}</li>
     </ul>
-    <h2>Watch this space...</h2>
+    <h2>Clients: {{stats.clients.length}}</h2>
+    <ul>
+      <li v-for="item in stats.clients">{{item.uuid}}</li>
+    </ul>
+    <h2>Services: {{stats.services.length}}</h2>
+    <ul>
+      <li v-for="item in stats.services">{{item.name}} ({{item.consumers}})</li>
+    </ul>
   </header>
 </template>
 

@@ -15,8 +15,8 @@ const handler = async (request) => {
     response.data.map(queue => {
       switch (true) {
         case queue.name.split('.').length === 3:
-        case queue.name.match(/__System.Client/) !== null:
-        case queue.name.match(/__System.Server/) !== null:
+        case queue.name.match(/__System.Nova.Client/) !== null:
+        case queue.name.match(/__System.Nova.Server/) !== null:
           break
         default:
           queues.push({

@@ -13,9 +13,9 @@ const handler = async (request) => {
     })
     let servers = []
     response.data.map(queue => {
-      if (queue.name.match(/__System.Client/)) {
+      if (queue.name.match(/__System.Nova.Client/)) {
         servers.push({
-          uuid: queue.name.split('.')[2],
+          uuid: queue.name.split('.')[3],
           queue: queue.name
         })
       }

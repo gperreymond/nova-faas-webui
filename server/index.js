@@ -3,32 +3,11 @@ const Inert = require('inert')
 const path = require('path')
 const debug = require('debug')
 const glob = require('glob-promise')
-const Client = require('nova-faas').Client
-
 const config = require('./config')
 
 const server = Hapi.server({
   host: config.host,
   port: config.port
-})
-
-const client = new Client()
-client
-  .subscribe('*.Error', (result) => {
-    console.log('error', result)
-  })
-  .subscribe('*.Success', (result) => {
-    console.log('success', result)
-  })
-  .start(config.rabbitmq)
-
-client.on('error', error => {
-  console.log('client error')
-  console.log(error)
-})
-
-client.on('ready', () => {
-  debug('nova-faas:client')('ready')
 })
 
 const start = async () => {

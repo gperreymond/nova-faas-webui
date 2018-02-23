@@ -1,13 +1,13 @@
 const Client = require('nova-faas').Client
-const config = require('../server/config')
 const client = new Client()
+const config = require('../../../server/config')
 
 client
-  .subscribe('*.Error', (result) => {
-    console.log('error', result)
-  })
-  .subscribe('*.Success', (result) => {
+  .subscribe('BasicNopeQuery.Success', (result) => {
     console.log('success', result)
+  })
+  .subscribe('BasicNopeQuery.Error', (result) => {
+    console.log('error', result)
   })
   .start(config.rabbitmq)
 
@@ -18,4 +18,5 @@ client.on('error', error => {
 
 client.on('ready', () => {
   console.log('client connected')
+  client.send('BasicNopeQuery', {message: 'This is a query from 01'})
 })

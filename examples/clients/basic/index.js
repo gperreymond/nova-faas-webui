@@ -18,5 +18,7 @@ client.on('error', error => {
 
 client.on('ready', () => {
   console.log('client connected')
-  client.send('BasicNopeQuery', {message: 'This is a query from 01'})
+  setInterval(() => {
+    client.send('BasicNopeQuery', {message: `This is a message from ${client.uuid}`})
+  }, 250)
 })

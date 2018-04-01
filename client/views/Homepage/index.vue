@@ -8,13 +8,19 @@
     <section v-if="stats.servers.length > 0">
       <h2>Servers: {{stats.servers.length}}</h2>
       <ul>
-        <li v-for="item in stats.servers">{{item.uuid}}</li>
+        <li v-for="item in stats.servers">
+          <span class="uuid">{{item.uuid}}</span>
+          <span class="memory">{{item.memory}} Mo</span>
+        </li>
       </ul>
     </section>
     <section v-if="stats.clients.length > 0">
       <h2>Clients: {{stats.clients.length}}</h2>
       <ul>
-        <li v-for="item in stats.clients">{{item.uuid}}</li>
+        <li v-for="item in stats.clients">
+          <span class="uuid">{{item.uuid}}</span>
+          <span class="memory">{{item.memory}} Mo</span>
+        </li>
       </ul>
     </section>
     <section v-if="stats.services.length > 0">

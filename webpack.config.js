@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
+  mode: 'development',
   entry: {
     bundle: path.resolve(__dirname, 'client/main.js')
   },
@@ -37,6 +38,7 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+      WS_URL: 'ws:localhost:4000',
       DEBUG: true
     }),
     new ExtractTextPlugin('bundle.min.css')

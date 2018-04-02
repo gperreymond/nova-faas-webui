@@ -1,26 +1,112 @@
 version: 2
+
 aliases:
+
+  - &use_docker_node
+    docker:
+      - image: circleci/node:8
+
   - &env_global
     environment:
       ECS_APP: nova-faas-webui
-jobs:
-  build:
-    <<: *env_global
-    docker:
-      - image: circleci/node:8
-    working_directory: ~/repo
+
+  - &step_build_docker_image
     steps:
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-      - run: yarn install
-      - save_cache:
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: Build docker image
+          command: |
+            cp -r /tmp/public/dist/ public/
+            ./build_image.sh
+      - persist_to_workspace:
+          root: /tmp
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test:coverage
-      - run: yarn build:client
-      - run: ./docker_build.sh
+            - images
+
+  - &step_test_docker_image
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Test docker image
+          command: ./test_image.sh
+
+jobs:
+
+  # Tests
+  tests:
+    <<: *use_docker_node
+    steps:
+      - checkout
+      - run:
+          name: Install node dependencies
+          command: yarn
+      - run:
+          name: Run tests
+          command: yarn test:coverage
+
+  # Webpack
+  webpack:
+    <<: *use_docker_node
+    steps:
+      - checkout
+      - run:
+          name: Install node dependencies
+          command: yarn
+      - run:
+          name: Run Webpack
+          command: yarn webpack:prod
+      - run:
+          name: Save assets
+          command: |
+            mkdir -p /tmp/public/dist
+            cp -r public/dist/ /tmp/public/
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - public
+
+  # Build docker image
+  docker_build:
+    <<: *env_global
+    <<: *use_docker_node
+    <<: *step_build_docker_image
+  # Run tests specs on docker image
+  docker_test:
+    <<: *env_global
+    <<: *use_docker_node
+    <<: *step_test_docker_image
+
+workflows:
+
+  version: 2
+
+  commit:
+    jobs:
+      - tests:
+          filters:
+            branches:
+              ignore: master
+
+  production:
+    jobs:
+      - tests:
+          filters:
+            branches:
+              only: master
+      - webpack:
+          filters:
+            branches:
+              only: master
+      - docker_build:
+          requires:
+            - tests
+            - webpack
+          filters:
+            branches:
+              only: master

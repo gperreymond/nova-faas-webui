@@ -1,6 +1,5 @@
 #!/bin/bash
 
-ECS_APP=nova-faas-webui
 BUILD_DIR=${1:-.}
 
 docker build -t gperreymond/${ECS_APP} --build-arg CIRCLE_SHA1=$CIRCLE_SHA1 $BUILD_DIR

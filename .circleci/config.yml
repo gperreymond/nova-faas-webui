@@ -83,7 +83,7 @@ jobs:
     <<: *use_docker_node
     <<: *step_test_docker_image
   # Publish docker image
-  docker_test:
+  docker_publish:
     <<: *env_global
     <<: *use_docker_node
     <<: *step_publish_docker_image

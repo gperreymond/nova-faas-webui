@@ -1,15 +1,12 @@
 version: 2
 
 aliases:
-
   - &use_docker_node
     docker:
       - image: circleci/node:8
-
   - &env_global
     environment:
       ECS_APP: nova-faas-webui
-
   - &step_build_docker_image
     steps:
       - checkout
@@ -25,7 +22,6 @@ aliases:
           root: /tmp
           paths:
             - images
-
   - &step_test_docker_image
     steps:
       - attach_workspace:
@@ -35,9 +31,7 @@ aliases:
       - run:
           name: Test docker image
           command: ./test_image.sh
-
 jobs:
-
   # Tests
   tests:
     <<: *use_docker_node
@@ -49,7 +43,6 @@ jobs:
       - run:
           name: Run tests
           command: yarn test:coverage
-
   # Webpack
   webpack:
     <<: *use_docker_node
@@ -70,7 +63,6 @@ jobs:
           root: /tmp
           paths:
             - public
-
   # Build docker image
   docker_build:
     <<: *env_global
@@ -81,18 +73,14 @@ jobs:
     <<: *env_global
     <<: *use_docker_node
     <<: *step_test_docker_image
-
 workflows:
-
   version: 2
-
   commit:
     jobs:
       - tests:
           filters:
             branches:
               ignore: master
-
   production:
     jobs:
       - tests:
@@ -110,3 +98,9 @@ workflows:
           filters:
             branches:
               only: master
+    - docker_test:
+        requires:
+          - docker_build
+        filters:
+          branches:
+            only: master

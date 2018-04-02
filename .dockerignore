@@ -15,10 +15,12 @@ test
 .queues
 docker_build.sh
 Dockerfile
+goss.yaml
 LICENSE
 nconf.json
 nodemon.js
 package-lock.json
+test_image.sh
 webpack.config.js
 webpack.prod.config.js
 yarn-error.log

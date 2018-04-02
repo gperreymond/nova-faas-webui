@@ -1,11 +1,17 @@
 version: 2
+aliases:
+  - &env_global
+    environment:
+      ECS_APP: nova-faas-webui
 jobs:
   build:
     docker:
       - image: circleci/node:8
     working_directory: ~/repo
     steps:
+      <<: *env_global
       - checkout
+      - setup_remote_docker
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
@@ -15,4 +21,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test:standard
+      - run: yarn test:coverage
+      - run: yarn build:client
+      - run: ./docker_build.sh

@@ -1,0 +1,25 @@
+# directories
+.circleci
+.git
+.nyc_output
+client
+coverage
+examples
+node_modules
+test
+
+#files
+.babelrc
+.dockerignore
+.mocharc
+.queues
+docker_build.sh
+Dockerfile
+LICENSE
+nconf.json
+nodemon.js
+package-lock.json
+webpack.config.js
+webpack.prod.config.js
+yarn-error.log
+yarn.lock

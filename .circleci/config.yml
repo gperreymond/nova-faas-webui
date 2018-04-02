@@ -4,6 +4,9 @@ aliases:
   - &use_docker_node
     docker:
       - image: circleci/node:8
+  - &use_docker_awscli
+    docker:
+      - image: 062010136920.dkr.ecr.us-west-1.amazonaws.com/viadeo/docker-awscli:latest
   - &env_global
     environment:
       ECS_APP: nova-faas-webui
@@ -66,12 +69,12 @@ jobs:
   # Build docker image
   docker_build:
     <<: *env_global
-    <<: *use_docker_node
+    <<: *use_docker_awscli
     <<: *step_build_docker_image
   # Run tests specs on docker image
   docker_test:
     <<: *env_global
-    <<: *use_docker_node
+    <<: *use_docker_awscli
     <<: *step_test_docker_image
 workflows:
   version: 2

@@ -14,13 +14,14 @@ test
 .mocharc
 .queues
 docker_build.sh
+docker_publish.sh
+docker_test.sh
 Dockerfile
 goss.yaml
 LICENSE
 nconf.json
 nodemon.js
 package-lock.json
-test_image.sh
 webpack.config.js
 webpack.prod.config.js
 yarn-error.log

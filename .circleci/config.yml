@@ -17,7 +17,7 @@ aliases:
           name: Build docker image
           command: |
             cp -r /tmp/public/dist/ public/
-            ./build_image.sh
+            ./docker_build.sh
       - persist_to_workspace:
           root: /tmp
           paths:
@@ -30,7 +30,16 @@ aliases:
       - setup_remote_docker
       - run:
           name: Test docker image
-          command: ./test_image.sh
+          command: ./docker_test.sh
+  - &step_publish_docker_image
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Push docker image
+          command: ./docker_publish.sh
 jobs:
   # Tests
   tests:
@@ -73,6 +82,11 @@ jobs:
     <<: *env_global
     <<: *use_docker_node
     <<: *step_test_docker_image
+  # Publish docker image
+  docker_test:
+    <<: *env_global
+    <<: *use_docker_node
+    <<: *step_publish_docker_image
 workflows:
   version: 2
   commit:
@@ -101,6 +115,12 @@ workflows:
       - docker_test:
           requires:
             - docker_build
+          filters:
+            branches:
+              only: master
+      - docker_publish:
+          requires:
+            - docker_test
           filters:
             branches:
               only: master

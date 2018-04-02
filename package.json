@@ -1,6 +1,6 @@
 {
   "name": "nova-faas-webui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "start:client": "./node_modules/.bin/webpack -d --watch",
@@ -24,7 +24,7 @@
     "node": "8"
   },
   "dependencies": {
-    "bell": "9.1.0",
+    "bell": "9.2.0",
     "boom": "7.2.0",
     "catbox": "10.0.2",
     "catbox-memcached": "1.1.1",
@@ -32,7 +32,7 @@
     "debug": "3.1.0",
     "glob": "7.1.2",
     "glob-promise": "3.4.0",
-    "hapi": "17.3.0",
+    "hapi": "17.3.1",
     "hapi-auth-jwt2": "8.1.0",
     "hoek": "5.0.3",
     "inert": "5.1.0",

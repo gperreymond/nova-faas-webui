@@ -38,7 +38,7 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
-      WS_URL: 'ws:api.snapbook.io:4000',
+      WS_URL: 'ws:localhost:4000',
       DEBUG: false
     }),
     new ExtractTextPlugin('bundle.min.css')

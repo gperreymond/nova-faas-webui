@@ -5,11 +5,11 @@ aliases:
       ECS_APP: nova-faas-webui
 jobs:
   build:
+    <<: *env_global
     docker:
       - image: circleci/node:8
     working_directory: ~/repo
     steps:
-      <<: *env_global
       - checkout
       - setup_remote_docker
       - restore_cache:
